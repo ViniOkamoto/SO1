@@ -8,6 +8,8 @@ public class ThreadCruzamento extends Thread{
 	private int idCarro;
 	private Semaphore semaforo;
 	static private int ordemDeSaida;
+	private int sentidoRandom;
+	private static String sentido;
 	
 
 	public ThreadCruzamento(int idCarro, Semaphore semaforo) {
@@ -41,7 +43,21 @@ public class ThreadCruzamento extends Thread{
 	
 	private void Saindo() {
 		Random random = new Random();
-		int vm = random.nextInt(120);
+		sentidoRandom = random.nextInt(4);
+		switch(sentidoRandom){
+			case 1:
+			sentido = "norte";
+			break;
+			case 2:
+			sentido = "sul";
+			break;
+			case 3:
+			sentido = "leste";
+			break;
+			default:
+			sentido = "oeste";
+			break;
+		}
 		try {
 			sleep(vm);
 		} catch (InterruptedException e) {
@@ -52,6 +68,6 @@ public class ThreadCruzamento extends Thread{
 	
 	private void Saida() {
 		ordemDeSaida++;
-		System.out.println(idCarro + " saiu " + ordemDeSaida + "°");
+		System.out.println(idCarro + " saiu " + ordemDeSaida + "ï¿½");
 	}
 }
